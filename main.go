@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -8,11 +9,15 @@ import (
 )
 
 func main() {
+	fmt.Println("server running on port 5000")
 	router := mux.NewRouter()
 	router.HandleFunc("/test", test)
-	log.Fatalln(http.ListenAndServe(":8080", router))
+	log.Fatalln(http.ListenAndServe(":5000", router))
 }
 
 func test(w http.ResponseWriter, _ *http.Request) {
-	log.Fatalln(w.Write([]byte("This is a test")))
+	_, err := w.Write([]byte("This is a test"))
+	if err != nil {
+	log.Fatalln(err, "error writing header")
+	}
 }

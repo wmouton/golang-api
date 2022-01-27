@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -16,7 +17,7 @@ func main() {
 }
 
 func test(w http.ResponseWriter, _ *http.Request) {
-	_, err := w.Write([]byte("This is a test"))
+	err := json.NewEncoder(w).Encode(struct { ID	string}{ID: "555"})
 	if err != nil {
 	log.Fatalln(err, "error writing header")
 	}

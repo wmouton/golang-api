@@ -41,7 +41,9 @@ func main() {
 }
 
 // getAllPosts returns all of the posts
-func getAllPosts(w http.ResponseWriter, r *http.Request) {
+func getAllPosts(w http.ResponseWriter, _ *http.Request) {
+	// Set the header content type to get the data back in JSON format
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(posts); err != nil {
 		log.Fatalln(err, "could not encode json data")
 	}

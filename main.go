@@ -34,9 +34,17 @@ func main() {
 	// Create a new mux router.
 	router := mux.NewRouter()
 	// Handler functions
-	router.HandleFunc("/add", addPost).Methods("POST")
+	router.HandleFunc("/posts", addPost).Methods("POST")
+	router.HandleFunc("/posts", getAllPosts).Methods("GET")
 	// Listen and serve on port 5000 - log the errors
 	log.Fatalln(http.ListenAndServe(":5000", router))
+}
+
+// getAllPosts returns all of the posts
+func getAllPosts(w http.ResponseWriter, r *http.Request) {
+	if err := json.NewEncoder(w).Encode(posts); err != nil {
+		log.Fatalln(err, "could not encode json data")
+	}
 }
 
 // addPost adds a new post
@@ -49,7 +57,5 @@ func addPost(w http.ResponseWriter, r *http.Request) {
 	posts = append(posts, newPost)
 	// Send data back as JSON in the header
 	w.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(w).Encode(posts); err != nil {
-		log.Fatalln(err, "error parsing json data")
-	}
+	_ =  json.NewEncoder(w).Encode(posts)
 }

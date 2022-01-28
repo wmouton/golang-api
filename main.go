@@ -9,12 +9,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type item struct {
-	Data		string	`json:"data"`
-	OtherData	int		`json:"otherData"`
+type post struct {
+	Title	string	`json:"title"`
+	Body	string	`json:"body"`
+	Author	string	`json:"author"`
 }
 
-var data []item
+var data []post
 
 func main() {
 	fmt.Println("server running on port 5000")
@@ -25,12 +26,12 @@ func main() {
 
 func addItem(w http.ResponseWriter, r *http.Request) {
 	// get Item value from the JSON body
-	var newItem item
-	err := json.NewDecoder(r.Body).Decode(&newItem)
+	var newPost post
+	err := json.NewDecoder(r.Body).Decode(&newPost)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	data = append(data, newItem)
+	data = append(data, newPost)
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(data); err != nil {
 		log.Fatalln(err, "error parsing json data")

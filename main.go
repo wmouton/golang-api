@@ -10,7 +10,7 @@ import (
 )
 
 type item struct {
-	Data	string
+	Data	string	`json:"data"`
 }
 
 var data []item

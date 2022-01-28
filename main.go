@@ -10,7 +10,7 @@ import (
 )
 
 type item struct {
-	data	string
+	Data	string
 }
 
 var data []item
@@ -25,8 +25,9 @@ func main() {
 func addItem(w http.ResponseWriter, r *http.Request) {
 	// get Item value from the JSON body
 	var newItem item
-	if err := json.NewDecoder(r.Body).Decode(&newItem); err != nil {
-		log.Fatalln(err, "Error... Could not decode request body.")
+	err := json.NewDecoder(r.Body).Decode(&newItem)
+	if err != nil {
+		log.Fatalln(err)
 	}
 	data = append(data, newItem)
 	w.Header().Set("Content-Type", "application/json")

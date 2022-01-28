@@ -36,14 +36,20 @@ func main() {
 	// Handler functions
 	router.HandleFunc("/posts", addPost).Methods("POST")
 	router.HandleFunc("/posts", getAllPosts).Methods("GET")
+	router.HandleFunc("/posts/{id}", getSinglePost).Methods("GET")
 	// Listen and serve on port 5000 - log the errors
 	log.Fatalln(http.ListenAndServe(":5000", router))
+}
+
+func getSinglePost(_ http.ResponseWriter, _ *http.Request) {
+	// Get the ID of the a single post
 }
 
 // getAllPosts returns all of the posts
 func getAllPosts(w http.ResponseWriter, _ *http.Request) {
 	// Set the header content type to get the data back in JSON format
 	w.Header().Set("Content-Type", "application/json")
+	// Handle error when encoding data
 	if err := json.NewEncoder(w).Encode(posts); err != nil {
 		log.Fatalln(err, "could not encode json data")
 	}

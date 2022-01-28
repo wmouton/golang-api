@@ -9,11 +9,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type Item struct {
+type item struct {
 	data	string
 }
 
-var data []Item
+var data []item
 
 func main() {
 	fmt.Println("server running on port 5000")
@@ -24,7 +24,7 @@ func main() {
 
 func addItem(w http.ResponseWriter, r *http.Request) {
 	// get Item value from the JSON body
-	var newItem Item
+	var newItem item
 	if err := json.NewDecoder(r.Body).Decode(&newItem); err != nil {
 		log.Fatalln(err, "Error... Could not decode request body.")
 	}

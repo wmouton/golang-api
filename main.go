@@ -15,7 +15,7 @@ type post struct {
 	Author	string	`json:"author"`
 }
 
-var data []post
+var posts []post
 
 func main() {
 	fmt.Println("server running on port 5000")
@@ -31,9 +31,9 @@ func addItem(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	data = append(data, newPost)
+	posts = append(posts, newPost)
 	w.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(w).Encode(data); err != nil {
+	if err := json.NewEncoder(w).Encode(posts); err != nil {
 		log.Fatalln(err, "error parsing json data")
 	}
 }

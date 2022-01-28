@@ -9,13 +9,21 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type post struct {
+// Post struct represents the post data
+type Post struct {
 	Title	string	`json:"title"`
-	Body	string	`json:"body"`
-	Author	string	`json:"author"`
+	Info	string	`json:"Info"`
+	Author	*Author	`json:"author"`
 }
 
-var posts []post
+// Author struct represents user data
+type Author struct {
+	Fullname string `json:"fullname"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+}
+
+var posts []Post
 
 func main() {
 	fmt.Println("server running on port 5000")
@@ -26,11 +34,8 @@ func main() {
 
 func addItem(w http.ResponseWriter, r *http.Request) {
 	// get Item value from the JSON body
-	var newPost post
-	err := json.NewDecoder(r.Body).Decode(&newPost)
-	if err != nil {
-		log.Fatalln(err)
-	}
+	var newPost Post
+	_ = json.NewDecoder(r.Body).Decode(&newPost)
 	posts = append(posts, newPost)
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(posts); err != nil {

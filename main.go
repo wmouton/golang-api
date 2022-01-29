@@ -44,12 +44,17 @@ func main() {
 
 func getSinglePost(w http.ResponseWriter, r *http.Request) {
 	// Get the ID of the a single post
-	var idParam string = mux.Vars(r)["id"]
+	idParam := mux.Vars(r)["id"]
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
 		w.WriteHeader(400)
 		log.Fatalln(w.Write([]byte("Could not convert ID to integer")))
 		return
+	}
+	// Error checking on id
+	if id >= len(posts) {
+		w.WriteHeader(400)
+		log.Fatalln(w.Write([]byte("No post found with specified ID")))
 	}
 }
 

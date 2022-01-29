@@ -56,6 +56,12 @@ func getSinglePost(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(400)
 		log.Fatalln(w.Write([]byte("No post found with specified ID")))
 	}
+	post := posts[id]
+	// Set header content type
+	w.Header().Set("Content-Type", "application/json")
+	if err = json.NewEncoder(w).Encode(post); err != nil {
+		log.Fatalln(err, "Could not encode JSON data")
+	}
 }
 
 // getAllPosts returns all of the posts

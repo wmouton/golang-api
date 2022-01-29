@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	// Third party imports
 	"github.com/gorilla/mux"
@@ -41,9 +42,15 @@ func main() {
 	log.Fatalln(http.ListenAndServe(":5000", router))
 }
 
-func getSinglePost(_ http.ResponseWriter, r *http.Request) {
+func getSinglePost(w http.ResponseWriter, r *http.Request) {
 	// Get the ID of the a single post
 	var idParam string = mux.Vars(r)["id"]
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		w.WriteHeader(400)
+		log.Fatalln(w.Write([]byte("Could not convert ID to integer")))
+		return
+	}
 }
 
 // getAllPosts returns all of the posts

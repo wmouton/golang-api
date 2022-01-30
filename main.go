@@ -94,7 +94,13 @@ func updateSinglePost(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(idParam)
 	if err != nil {
 		w.WriteHeader(400)
-		w.Write([]byte("ID could not be converted to integer"))
-
+		log.Fatalln(w.Write([]byte("ID could not be converted to integer")))
+		return
+	}
+	// Error checking
+	if id >= len(posts) {
+		w.WriteHeader(404)
+		log.Fatalln(w.Write([]byte("Post not found with specified ID")))
+		return
 	}
 }

@@ -38,6 +38,7 @@ func main() {
 	router.HandleFunc("/posts", addPost).Methods("POST")
 	router.HandleFunc("/posts", getAllPosts).Methods("GET")
 	router.HandleFunc("/posts/{id}", getSinglePost).Methods("GET")
+	router.HandleFunc("/posts/{id}", updateSinglePost).Methods("PUT")
 	// Listen and serve on port 5000 - log the errors
 	log.Fatalln(http.ListenAndServe(":5000", router))
 }
@@ -85,4 +86,8 @@ func addPost(w http.ResponseWriter, r *http.Request) {
 	// Send data back as JSON in the header
 	w.Header().Set("Content-Type", "application/json")
 	_ =  json.NewEncoder(w).Encode(posts)
+}
+
+func updateSinglePost(_ http.ResponseWriter, _ *http.Request) {
+
 }

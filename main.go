@@ -88,6 +88,13 @@ func addPost(w http.ResponseWriter, r *http.Request) {
 	_ =  json.NewEncoder(w).Encode(posts)
 }
 
-func updateSinglePost(_ http.ResponseWriter, _ *http.Request) {
+func updateSinglePost(w http.ResponseWriter, r *http.Request) {
+	// Get the ID of the post from the route parameters
+	idParam := mux.Vars(r)["id"]
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		w.WriteHeader(400)
+		w.Write([]byte("ID could not be converted to integer"))
 
+	}
 }

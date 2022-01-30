@@ -106,4 +106,9 @@ func updateSinglePost(w http.ResponseWriter, r *http.Request) {
 	// Get the value from the JSON body
 	var updatedPost Post
 	_ = json.NewDecoder(r.Body).Decode(&updatedPost)
+	posts[id] = updatedPost
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(updatedPost); err != nil {
+		log.Fatalln(err)
+	}
 }

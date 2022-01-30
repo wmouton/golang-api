@@ -103,4 +103,7 @@ func updateSinglePost(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(w.Write([]byte("Post not found with specified ID")))
 		return
 	}
+	// Get the value from the JSON body
+	var updatedPost Post
+	_ = json.NewDecoder(r.Body).Decode(&updatedPost)
 }

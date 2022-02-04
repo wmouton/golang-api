@@ -39,6 +39,7 @@ func main() {
 	router.HandleFunc("/posts", getAllPosts).Methods("GET")
 	router.HandleFunc("/posts/{id}", getSinglePost).Methods("GET")
 	router.HandleFunc("/posts/{id}", updateSinglePost).Methods("PUT")
+	router.HandleFunc("/posts/{id}", patchPost).Methods("PATCH")
 	// Listen and serve on port 5000 - log the errors
 	log.Fatalln(http.ListenAndServe(":5000", router))
 }
@@ -111,4 +112,8 @@ func updateSinglePost(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewEncoder(w).Encode(updatedPost); err != nil {
 		log.Fatalln(err)
 	}
+}
+
+func patchPost(w http.ResponseWriter, r *http.Request) {
+	
 }

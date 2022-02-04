@@ -132,4 +132,6 @@ func patchPost(w http.ResponseWriter, r *http.Request) {
 	// Get the current value
 	post := posts[id]
 	json.NewDecoder(r).Decode(&post)
+
+	w.Header().Set("Content-Type", "application/json")
 }

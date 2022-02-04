@@ -129,4 +129,5 @@ func patchPost(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(w.Write([]byte("Post not found with specified ID")))
 		return
 	}
+	// Get the current value
 }

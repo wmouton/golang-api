@@ -130,8 +130,8 @@ func patchPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Get the current value
-	post := posts[id]
-	_ = json.NewDecoder(r.Body).Decode(&post)
+	post := &posts[id]
+	_ = json.NewDecoder(r.Body).Decode(post)
 
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(post); err != nil {

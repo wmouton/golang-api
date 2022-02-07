@@ -56,8 +56,9 @@ func getSinglePost(w http.ResponseWriter, r *http.Request) {
 	}
 	// Error checking on id
 	if id >= len(posts) {
-		w.WriteHeader(400)
+		w.WriteHeader(404)
 		log.Fatalln(w.Write([]byte("No post found with specified ID")))
+		return
 	}
 	post := posts[id]
 	// Set header content type
@@ -158,4 +159,5 @@ func deletePost(w http.ResponseWriter, r *http.Request) {
 	// Delete the post from the slice
 	// https://github.com/golang/go/wiki/SliceTricks#delete
 	posts = append(posts[:id], posts[id+1:]...)
+	w.WriteHeader(200)
 }

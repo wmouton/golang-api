@@ -40,6 +40,7 @@ func main() {
 	router.HandleFunc("/posts/{id}", getSinglePost).Methods("GET")
 	router.HandleFunc("/posts/{id}", updateSinglePost).Methods("PUT")
 	router.HandleFunc("/posts/{id}", patchPost).Methods("PATCH")
+	router.HandleFunc("/posts/{id}", deletePost).Methods("DELETE")
 	// Listen and serve on port 5000 - log the errors
 	log.Fatalln(http.ListenAndServe(":5000", router))
 }
@@ -138,3 +139,5 @@ func patchPost(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 }
+
+func deletePost(w http.ResponseWriter, r *http.Request) {}

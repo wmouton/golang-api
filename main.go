@@ -156,5 +156,6 @@ func deletePost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Delete the post from the slice
+	// https://github.com/golang/go/wiki/SliceTricks#delete
 	posts = append(posts[:id], posts[id+1:]...)
 }

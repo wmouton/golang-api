@@ -140,4 +140,19 @@ func patchPost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func deletePost(w http.ResponseWriter, r *http.Request) {}
+func deletePost(w http.ResponseWriter, r *http.Request) {
+	// Get the ID of the post from the route parameters
+	idParam := mux.Vars(r)["id"]
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		w.WriteHeader(400)
+		log.Fatalln(w.Write([]byte("ID could not be converted to integer")))
+		return
+	}
+	// Error checking
+	if id >= len(posts) {
+		w.WriteHeader(404)
+		log.Fatalln(w.Write([]byte("Post not found with specified ID")))
+		return
+	}
+}

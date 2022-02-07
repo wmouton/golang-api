@@ -155,4 +155,6 @@ func deletePost(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(w.Write([]byte("Post not found with specified ID")))
 		return
 	}
+	// Delete the post from the slice
+	posts = append(posts[:id], posts[id+1:]...)
 }

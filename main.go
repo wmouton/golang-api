@@ -45,6 +45,7 @@ func main() {
 	log.Fatalln(http.ListenAndServe(":5000", router))
 }
 
+// get back a single post
 func getSinglePost(w http.ResponseWriter, r *http.Request) {
 	// Get the ID of the a single post
 	idParam := mux.Vars(r)["id"]

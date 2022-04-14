@@ -92,6 +92,7 @@ func addPost(w http.ResponseWriter, r *http.Request) {
 	_ =  json.NewEncoder(w).Encode(posts)
 }
 
+// updateSinglePost updates a single post
 func updateSinglePost(w http.ResponseWriter, r *http.Request) {
 	// Get the ID of the post from the route parameters
 	idParam := mux.Vars(r)["id"]

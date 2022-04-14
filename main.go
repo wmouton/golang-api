@@ -118,7 +118,7 @@ func updateSinglePost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// patchPost patches a post
+// patchPost patches posts
 func patchPost(w http.ResponseWriter, r *http.Request) {
 	// Get the ID of the post from the route parameters
 	idParam := mux.Vars(r)["id"]

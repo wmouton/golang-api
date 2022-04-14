@@ -144,6 +144,7 @@ func patchPost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// deletePost will delete a single post
 func deletePost(w http.ResponseWriter, r *http.Request) {
 	// Get the ID of the post from the route parameters
 	idParam := mux.Vars(r)["id"]

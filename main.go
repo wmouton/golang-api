@@ -114,7 +114,7 @@ func updateSinglePost(w http.ResponseWriter, r *http.Request) {
 	posts[id] = updatedPost
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(updatedPost); err != nil {
-		log.Fatalln(err)
+		log.Fatalln(err, "could not encode json data")
 	}
 }
 

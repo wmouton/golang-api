@@ -140,7 +140,7 @@ func patchPost(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(post); err != nil {
-		log.Fatalln(err)
+		log.Fatalln(err,  "could not encode json data")
 	}
 }
 
